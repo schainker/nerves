@@ -5,7 +5,7 @@ defmodule Nerves.TestServer.Router do
   plug(:dispatch)
 
   def start_link do
-    Plug.Adapters.Cowboy.http(Nerves.TestServer.Router, [])
+    Plug.Adapters.Cowboy2.http(Nerves.TestServer.Router, [])
   end
 
   get "/no_auth/*_" do

@@ -68,7 +68,7 @@ defmodule Nerves.Package do
     config = Enum.reject(config[:nerves_package], fn {k, _v} -> k in @required end)
 
     dep_opts =
-      Mix.Dep.loaded(env: Mix.env())
+      Mix.Dep.load_on_environment(env: Mix.env())
       |> Enum.find(%{}, &(&1.app == app))
       |> Map.get(:opts, [])
       |> Keyword.get(:nerves, [])
@@ -167,7 +167,7 @@ defmodule Nerves.Package do
 
   defp load_nerves_config(path) do
     config_path(path)
-    |> Mix.Config.read!()
+    |> Mix.Config.eval!()
     |> Mix.Config.persist()
   end
 
